@@ -20,27 +20,24 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "persons")
 public class Person {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "person_id")
 	private Long id;
 	private String name;
 	private int age;
-	
+
 	@OneToMany(mappedBy = "person")
 	private Set<Ability> skills = new HashSet<>();
-	
+
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JsonBackReference // evita problemas de serializacion
-	@JoinTable(name = "persons_parties", joinColumns = @JoinColumn(name = "person_id", 
-				referencedColumnName = "person_id"), 
-				inverseJoinColumns = @JoinColumn(name = "party_id", 
-				referencedColumnName = "party_id"))
+	@JoinTable(name = "people_parties", joinColumns = @JoinColumn(name = "person_id", referencedColumnName = "person_id"), inverseJoinColumns = @JoinColumn(name = "party_id", referencedColumnName = "party_id"))
 	private Set<Party> parties = new HashSet<>();
 
 	public Person() {
-		
+
 	}
 
 	public Long getId() {
@@ -82,7 +79,5 @@ public class Person {
 	public void setParties(Set<Party> parties) {
 		this.parties = parties;
 	}
-	
-	
-	
+
 }

@@ -33,10 +33,7 @@ public class Party {
 	private Date date;
 	
 	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "persons_parties", joinColumns = @JoinColumn(name = "party_id", 
-				referencedColumnName = "party_id"), 
-				inverseJoinColumns = @JoinColumn(name = "person_id", 
-				referencedColumnName = "person_id"))
+	@JoinTable(name = "people_parties", joinColumns = @JoinColumn(name = "party_id", referencedColumnName = "party_id"), inverseJoinColumns = @JoinColumn(name = "person_id", referencedColumnName = "person_id"))
 	private Set<Person> people = new HashSet<>();
 
 	public Party() {
